@@ -67,7 +67,8 @@ public class ArMenu extends AppCompatActivity {
                 if (clickNo == 1) {
                     Anchor anchor = hitResult.createAnchor();
                     ModelRenderable.builder()
-                            .setSource(this, R.raw.hamburger_needfix)
+                            .setSource(this, R.raw.hamburger_original_size)
+                            //.setSource(this, Uri.parse("https://poly.googleusercontent.com/downloads/c/fp/1609015861900636/bpKCEOb0ahk/2DemswC1nkB/snappy.glb"))
                             .setIsFilamentGltf(true)
                             .build()
                             .thenAccept(modelRenderable -> addModel(anchor, modelRenderable))
@@ -93,6 +94,9 @@ public class ArMenu extends AppCompatActivity {
 
         // attaching the anchorNode with the TransformableNode
         TransformableNode model = new TransformableNode(arCam.getTransformationSystem());
+        // Set scale for model - Maxscale must be greater than minscale
+        model.getScaleController().setMaxScale(0.02f);
+        model.getScaleController().setMinScale(0.01f);
         model.setParent(anchorNode);
 
         // attaching the 3d model with the TransformableNode
